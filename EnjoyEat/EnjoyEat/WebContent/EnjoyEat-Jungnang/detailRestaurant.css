@@ -1,0 +1,25 @@
+
+.map
+{
+  margin-top: 70px;
+  padding: 110px;
+  text-align: center;
+  background-color: red;
+}
+
+.info article{
+  margin:3%;
+}
+.reviewer{
+    width: 120px;
+    height: 120px;
+}
+
+.heart
+{
+  width: 70%;
+}
+.heartarea
+{
+  position:absolute; margin-left:25%;
+}

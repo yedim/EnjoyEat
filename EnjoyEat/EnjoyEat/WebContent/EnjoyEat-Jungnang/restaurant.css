@@ -1,0 +1,47 @@
+/* Select */
+#firstSelect
+{
+  float:left;
+  padding: 6px;
+  margin-left: 40%;
+  margin-right: 10px;
+  font-size:1.5em
+}
+#secondSelect
+{
+  padding: 6px;
+  font-size:1.5em;
+  width : 120px;
+}
+
+.search-container{
+  margin-top:100px;
+}
+.search-container button {
+  padding:10px;
+  margin:0px 10px;
+  background: #ddd;
+  font-size: 1.5em;
+  
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background: #ccc;
+}
+
+/* 페이지번호 */
+.pagebutton {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #ddd;
+    color: black;
+    border-radius: 50%;
+    border:1px solid white;
+    margin:2% 1%;
+    cursor: pointer;
+}
+.pagebutton:hover{background-color:#ff9166}
+

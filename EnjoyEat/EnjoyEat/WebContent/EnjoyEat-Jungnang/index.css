@@ -1,0 +1,83 @@
+header.title
+{
+  text-align: center;
+  padding: 300px;
+  margin: 50px;
+  background-image: url(mainImage01.jpg);
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #002833;
+  font-size: 2em;
+}
+.buttonStart{
+  background-color: white;
+  color: black;
+  border: 3px solid #002833;
+  font-size:0.8em;
+  padding: 15px 35px;
+  color:#002833;
+}
+
+.buttonStart:hover {
+  color:  #ff9166;
+}
+
+/* Best&Theme */
+header.contentTitle
+{
+  padding: 20px;
+  font-size: 1.5em;
+  margin:10px;
+}
+.contentDetails
+{
+  float: right;
+  font-size: 0.8em;
+}
+section.best
+{
+  background-color: #ddd
+}
+
+section.theme{
+
+
+}
+.grid-theme {
+display: grid;
+width: 80%;
+margin: 0 auto;
+grid-template-columns: 24% 24% 24% 24%;
+grid-gap: 20px;
+padding: 5%;
+padding-bottom:150px;
+}
+
+.grid-theme div {
+font-size: 1.6em;
+padding: 40px;
+border: 1px solid #ddd	;
+}
+.bestPrev,.bestNext
+{
+ cursor: pointer;
+  position: absolute;
+  top: 125%;
+  width: auto;
+  padding: 10px;  
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;	
+}
+
+.bestNext {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.bestPrev:hover, .bestNext:hover {
+  background-color: #ff9166;
+}
