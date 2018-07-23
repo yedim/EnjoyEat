@@ -1,4 +1,3 @@
-
 var f_selbox = new Array('음식종류', '지역', '가격' , '맛', '분위기');
 
 var s_selbox = new Array();

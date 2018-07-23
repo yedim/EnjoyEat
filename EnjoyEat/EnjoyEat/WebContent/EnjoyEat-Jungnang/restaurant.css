@@ -1,28 +1,26 @@
-/* Select */
-#firstSelect
-{
+#firstSelect{
   float:left;
   padding: 6px;
   margin-left: 40%;
   margin-right: 10px;
   font-size:1.5em
 }
-#secondSelect
-{
+
+#secondSelect{
   padding: 6px;
   font-size:1.5em;
   width : 120px;
 }
 
 .search-container{
-  margin-top:100px;
+  margin-top:170px;
 }
+
 .search-container button {
   padding:10px;
   margin:0px 10px;
   background: #ddd;
-  font-size: 1.5em;
-  
+  font-size: 1.5em;  
   border: none;
   cursor: pointer;
 }
@@ -43,5 +41,6 @@
     margin:2% 1%;
     cursor: pointer;
 }
-.pagebutton:hover{background-color:#ff9166}
-
+.pagebutton:hover{
+	background-color:#ff9166
+}

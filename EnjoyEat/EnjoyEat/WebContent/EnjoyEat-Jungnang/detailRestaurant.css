@@ -1,25 +1,75 @@
+#hidden{
+	width:1px;
+	height:1px;
+	border:0;
+}
 
-.map
-{
-  margin-top: 70px;
-  padding: 110px;
+#map{
+  margin-top: 150px;
   text-align: center;
   background-color: red;
+  width:100%;
+  height: 300px;
 }
 
 .info article{
-  margin:3%;
+  margin:3% 4%;
 }
+
 .reviewer{
     width: 120px;
     height: 120px;
 }
 
-.heart
-{
+.heart{
   width: 70%;
 }
-.heartarea
-{
+
+.heartarea{
   position:absolute; margin-left:25%;
+}
+
+
+.info article header{
+	font-size:1.3em;
+	font-weight:bold;
+	margin-bottom:10px;
+	
+}
+
+#menuTable,#detailTable {
+    border-collapse: collapse;
+    width: 35%;
+    margin:0.5%;
+}
+
+#menuTable td, #menuTable th {
+    border: 1px solid #ddd;
+    padding: 7px;
+}
+
+#menuTable td:nth-child(2n-1){
+	width:50%;
+}
+
+#menuTable tr:hover {
+	color: #ff9166;
+}
+
+#menuTable th {
+    padding-top: 10px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #fffbf2;
+    color:#002833 ;
+}
+
+.reveiwTable{
+	border-spacing:10px;
+}
+
+.reviewTd{
+	width:13%;
+	padding-left:10px;
+	border-right:3px solid #ff9166;
 }

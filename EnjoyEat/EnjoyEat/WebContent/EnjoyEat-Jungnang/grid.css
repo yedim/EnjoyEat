@@ -1,14 +1,20 @@
+body{
+	background-color:#fffbf2;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 3% 5%;
 }
+
 .grid-item {
-   padding: 10px;
-   height:430px;
-   font-size: 30px;
+   padding:4% 5%;
+   height:450px;
+   font-size: 1.5em;
    text-align: center;
 }
+
 .grid {
    margin: auto;
    width: 100%;
@@ -21,18 +27,25 @@
 }
 
 .grid-title{
-  font-size: 1.2em;
+  font-size: 1.5em;
   cursor:pointer;
 }
 
 .grid-star-review{
   float:right;
+  font-size: 1.2em;
 }
 
 .grid-item img{
-  width: 100%; height:75%;
+  width: 100%; 
+  height:70%;
+  max-height:300px;
   max-width: 380px;
   text-align: center;
   cursor:pointer;
 }
 
+.grid-star-review > img{
+	width:25px; 
+	height:25px;
+}

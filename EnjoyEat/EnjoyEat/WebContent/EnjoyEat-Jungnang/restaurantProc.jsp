@@ -62,7 +62,7 @@
 			tmp=info[0].trim();
 			if(cnt==0 || cnt%3==0){
 				%>
-			<section class="grid-container" id="ListGrid">
+			<section class="grid-container" >
 			<%}
 			%>		
 			  <article class="grid-item">
@@ -78,7 +78,7 @@
 			  	<%}
 			  %>
 			    <div class="grid">
-			      <div class="grid-star-review"><%=info[1]%></div>
+			      <div class="grid-star-review" ><img src="star.png"><%=info[1]%></div>
 			      <div class="grid-title" onclick="goToDetail('<%=info[0]%>');"><%=info[0]%></div>
 			      <div><%=info[2]%></div>
 			      <div><%=info[4]%>,<%=info[3]%></div>

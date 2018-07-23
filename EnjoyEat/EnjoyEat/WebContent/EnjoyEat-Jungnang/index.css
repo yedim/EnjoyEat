@@ -1,72 +1,108 @@
-header.title
-{
+#titleSection{
   text-align: center;
   padding: 300px;
-  margin: 50px;
-  background-image: url(mainImage01.jpg);
+  margin: 5%;
+  background-image: url(gif/delicious04.gif);
   background-size:cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #002833;
+  color: #ff9166;
   font-size: 2em;
 }
+
+
 .buttonStart{
-  background-color: white;
+  background-color:#fffbf2;
   color: black;
-  border: 3px solid #002833;
   font-size:0.8em;
+  border:none;
   padding: 15px 35px;
   color:#002833;
+  font-weight:bold;
+  transition: 0.3s;  
 }
 
 .buttonStart:hover {
-  color:  #ff9166;
+  color: white;
+  background-color:#ff9166;
+  cursor:pointer;
+  opacity:1;
+  animation:bounce .6s; 
 }
 
-/* Best&Theme */
-header.contentTitle
-{
-  padding: 20px;
-  font-size: 1.5em;
+header.contentTitle{
+  padding:3%;
+  padding-left:10%;
+  text-align:center;
   margin:10px;
+  font-size:2em;
+  font-weight:bold;
+  
 }
-.contentDetails
-{
+
+header> a.contentDetails{
   float: right;
-  font-size: 0.8em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.5em;
+  color:#002833;
 }
-section.best
-{
-  background-color: #ddd
+
+.contentTitle a:hover{
+ 	color:#ff9166;
+}
+
+section.best,.theme{
+	background-color: white;
+	margin:5%;
+	color:#002833;
 }
 
 section.theme{
-
-
+	padding-bottom:100px;
 }
+
 .grid-theme {
-display: grid;
-width: 80%;
-margin: 0 auto;
-grid-template-columns: 24% 24% 24% 24%;
-grid-gap: 20px;
-padding: 5%;
-padding-bottom:150px;
+	display: grid;
+	width: 70%;
+	margin: 5% auto;
+	grid-template-columns: 24% 24% 24% 24%;
+	grid-gap: 20px;
 }
 
 .grid-theme div {
-font-size: 1.6em;
-padding: 40px;
-border: 1px solid #ddd	;
+	font-size: 1em;
+	text-align:center;
+	font-weight:bold;
+	padding: 40px;
+	border: 1px solid #ddd;
+	cursor:pointer;
+	transition: 0.3s;
 }
-.bestPrev,.bestNext
-{
- cursor: pointer;
+
+.grid-theme > * { 
+	transition: opacity 150ms linear 100ms, transform 150ms ease-in-out 100ms; 
+}
+
+.grid-theme:hover > * { 
+	opacity: 0.4; 
+	transform: scale(0.9); 
+}
+
+.grid-theme > *:hover { 
+	opacity: 1; 
+	transform: scale(1); 
+	transition-delay: 0ms, 0ms; 	
+	background-color:#fffbf2;
+}
+
+.bestPrev,.bestNext{
+  cursor: pointer;
   position: absolute;
-  top: 125%;
+  top: 140%;
   width: auto;
   padding: 10px;  
-  color: white;
+  color: #ff9166;
   font-weight: bold;
   font-size: 30px;
   transition: 0.6s ease;
@@ -74,10 +110,56 @@ border: 1px solid #ddd	;
 }
 
 .bestNext {
-  right: 0;
+  right: 5%;
   border-radius: 3px 0 0 3px;
 }
 
 .bestPrev:hover, .bestNext:hover {
   background-color: #ff9166;
+  opacity:0.6;
+  color:white;
 }
+
+#topBtn {
+    display: none; 
+    position: fixed; 
+    bottom: 7%; 
+    right: 1%; 
+    z-index: 99; 
+    border: none; 
+    outline: none; 
+    background-color:rgba(255,145,102, 0.7);
+    cursor: pointer; 
+    padding: 10px; 
+    border-radius: 10px;
+    font-size: 18px; 
+    transition: 0.3s;
+}
+
+#topBtn:hover {
+    background-color:#ff9166; 
+}
+
+.title{
+	font-size:1.8em;
+}
+.title span { 
+	display:inline-block; 
+	animation:float .5s ease-in-out infinite; 
+}
+
+@keyframes float {
+  0%,100%{ transform:none; }
+  33%{ transform:translateY(-1px) rotate(-2deg); }
+  66%{ transform:translateY(1px) rotate(2deg); }
+}
+
+@keyframes bounce {
+  0%,100%{ transform:translate(0); }
+  25%{ transform:rotateX(20deg) translateY(2px) rotate(-3deg); }
+  50%{ transform:translateY(-20px) rotate(3deg) scale(1.1);  }
+}
+
+span:nth-child(3n) { color:hsl(21, 100%, 69%); text-shadow:1px 1px hsl(25, 81%, 47%), 2px 2px hsl(25, 81%, 47%), 3px 3px hsl(25, 81%, 47%), 4px 4px hsl(22, 81%, 47%); animation-delay:.15s;}
+span:nth-child(3n-1) { color:hsl(21, 100%, 69%); text-shadow:1px 1px hsl(25, 81%, 47%), 2px 2px hsl(25, 81%, 47%), 3px 3px hsl(25, 81%, 47%), 4px 4px hsl(22, 81%, 47%);  animation-delay:.25s;}
+span:nth-child(3n-2) { color:hsl(21, 100%, 69%); text-shadow:1px 1px hsl(25, 81%, 47%), 2px 2px hsl(25, 81%, 47%), 3px 3px hsl(25, 81%, 47%), 4px 4px hsl(22, 81%, 47%);  animation-delay:.35s;}

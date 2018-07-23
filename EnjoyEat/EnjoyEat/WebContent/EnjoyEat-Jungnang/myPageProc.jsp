@@ -8,39 +8,55 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="grid.css">
 <link rel="stylesheet" href="restaurant.css">
-<script src="selectBox.js"></script>
 <title>Insert title here</title>
+<style>
+.myPage{
+	margin-top:140px;
+}
+</style>
 </head>
-<body onload="init(this.form)">
-<jsp:include page="header.jsp" flush="false"></jsp:include>
+<body>
  <%
- 	request.setCharacterEncoding("utf-8");
-	String firstSelect=request.getParameter("firstSelect");
-	String secondSelect=request.getParameter("secondSelect");
- 	
-	int filterIdx=0;
-	//'음식종류', '지역', '가격' , '맛', '분위기'
-	if(firstSelect.equals("음식종류")){filterIdx=3;}
-	else if(firstSelect.equals("지역")){filterIdx=4;}
-	else if(firstSelect.equals("가격")){filterIdx=5;}
-	else if(firstSelect.equals("맛")){filterIdx=6;}
-	else if(firstSelect.equals("분위기")){filterIdx=7;}
-	
+ 	request.setCharacterEncoding("utf-8");	
 	String filePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/storeInfo.txt");
+	String likefilePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/likeStore.txt");
+
 	BufferedReader br= new BufferedReader(new FileReader(filePath));
+	BufferedReader likebr= new BufferedReader(new FileReader(likefilePath));
+
 	String ss=null;
 	ArrayList<String[]> strList= new ArrayList<String[]>();
+	ArrayList<String> likestrList= new ArrayList<String>();
+
 	String[] words;
 	String[] info=new String[14];
 
+	int n=0;
+	//likeStore에 있는거 다 넣어
+	try{
+		while(true){
+			ss = likebr.readLine();
+			if(ss==null)break;
+			if(n!=0)
+				likestrList.add(ss);	
+			n++;
+		}
+		likebr.close();
+	}catch(Exception e){	
+		e.getStackTrace();
+	}
+	
 	try{
 		while(true){
 			ss = br.readLine();
 			if(ss==null)break;
 			words= ss.split(",");
-			if(words[filterIdx].contains(secondSelect)){
-				strList.add(words);
-			}
+			for(int i=0; i<likestrList.size(); i++)
+			{
+				if(words[0].contains(likestrList.get(i))){
+					strList.add(words);
+				}
+			}		
 		}
 		br.close();
 	}catch(Exception e){	
@@ -48,16 +64,10 @@
 	}
 	
  %>
-  <div class="search-container">
-      <form name="form" method="post" action="restaurantFilterProc.jsp">
-	      <select id="firstSelect" name="firstSelect" onchange="itemChange(this.form);"></select>
-	      <select id="secondSelect" name="secondSelect"></select>
-	      <button type="submit">search</button>
-      </form>
- </div>
-       <form name="detail" method="post" action="detailRestaurantProc.jsp">
+      <form name="detail" method="post" action="detailRestaurantProc.jsp">
       	<input type="hidden" name="detailTitle" value="">
       </form>
+      
 <%
 	int cnt=0;
 	String tmp=null;
@@ -65,10 +75,10 @@
 	int lasti=strList.size()/9+1;
 	for(i=0; i<lasti; i++)//4pages
 	{
-		if(i==0){%> <div id="page1" class="pagecontent" ><%}
-		else if(i==1){%><div id="page2" class="pagecontent" > <%}
-		else if(i==2){%><div id="page3" class="pagecontent" > <%}
-		else if(i==3){%><div id="page4" class="pagecontent" > <%}
+		if(i==0){%> <div id="page1" class="pagecontent myPage" ><%}
+		else if(i==1){%><div id="page2" class="pagecontent myPage" > <%}
+		else if(i==2){%><div id="page3" class="pagecontent myPage" > <%}
+		else if(i==3){%><div id="page4" class="pagecontent myPage" > <%}
 		
 		for(int j=0; j<9;j++)//9grid
 		{
@@ -128,7 +138,8 @@
 %>
 	  </center>
 	</section>
-<script>
+	
+	<script>
 	function openPage(pageName,elmnt) {
 	    var i, pagecontent, pagebuttons;
 	    pagecontent = document.getElementsByClassName("pagecontent");
@@ -144,13 +155,12 @@
 	}
 	document.getElementById("defaultOpen").click();
 	
-	function goToDetail(title){
+	function goToDetail(title)
+	{
 		 var form = document.detail;
 	     form.detailTitle.value=title;
 	     form.submit();
 	}
-</script>
-	<jsp:include page="footer.jsp" flush="false"></jsp:include>
-
+	</script>
 </body>
 </html>
