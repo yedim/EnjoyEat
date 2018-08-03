@@ -14,14 +14,14 @@
     font-size:1.5em;
     font-weight:bold;
 }
-
+	
 .hrStyle{
     text-align: center;
 	color: #002833;
 	margin:10% 5% 1% 5%;	
 }
 
-input[type=text]{
+.mailAddress{
 	width:40%;
 	height:40px;
 	background-color:#fffbf2;
@@ -29,12 +29,12 @@ input[type=text]{
 	font-size:0.8em
 }
 
-input[type=text]:focus {
+.mailAddress:focus {
     background-color:#ff9166;
     color:white;
 }
 
-input[type=button]{
+.mailSendBtn{
 	border: none;
 	cursor: pointer;
 	text-decoration: none;

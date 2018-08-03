@@ -10,12 +10,91 @@
 <link rel="stylesheet" href="restaurant.css">
 <title>Insert title here</title>
 <style>
-.myPage{
-	margin-top:140px;
+
+
+header.contentTitle{
+  padding:3%;
+  padding-left:10%;
+  text-align:center;
+  padding-top:70px;
+  font-size:1.6em;
+  font-weight:bold;
+  
 }
+
+.contentTitle a:hover{
+ 	color:#ff9166;
+}
+
+section.myStore,.todayStore{
+	background-color: white;
+	margin:5%;
+	color:#002833;
+}
+
+.row{
+	padding:3% 5%;
+	padding-bottom:4%;
+}
+
+.column {
+    float: left;
+    padding: 0px 10px;
+    height: 300px; 
+}
+
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+  padding:20px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.column>.image{
+cursor:pointer;
+width:100%;
+height:100%;
+transition:all .2s ease-in-out;
+-webkit-transition:all .2s ease-in-out;
+-moz-transition:all .2s ease-in-out;
+-ms-transition:all .2s ease-in-out;
+-o-transition:all .2s ease-in-out;
+
+}
+
+.column>.image:hover {
+transition:all .4s ease-in-out;
+-webkit-transition:all .4s ease-in-out;
+-moz-transition:all .4s ease-in-out;
+-ms-transition:all .4s ease-in-out;
+-o-transition:all .4s ease-in-out;
+moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radius:50%
+}
+
+.img-square-ellipse:hover {-}
+
+.img-square-ellipse
+{
+
+}
+
+.img-square-ellipse:hover
+{
+
+}
+
 </style>
 </head>
 <body>
+
+	
  <%
  	request.setCharacterEncoding("utf-8");	
 	String filePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/storeInfo.txt");
@@ -32,6 +111,8 @@
 	String[] info=new String[14];
 
 	int n=0;
+	String tmp=null;
+
 	//likeStore에 있는거 다 넣어
 	try{
 		while(true){
@@ -68,9 +149,50 @@
       	<input type="hidden" name="detailTitle" value="">
       </form>
       
+        <section class="todayStore" style="padding-top:40px">
+	      <header class="contentTitle" >
+		         오늘의 추천 맛집
+	      </header>
+	      
+	      <div class="row">
+			<%
+				Random rand = new Random();
+				int randNum;
+				randNum= rand.nextInt(likestrList.size());
+				info = strList.get(randNum);
+				tmp=info[0].trim();
+			%>
+			  <div class="column left" >
+			 
+			  <%if(tmp.contains("원데이브레드"))
+			  	{%>
+			  		<img src="img/원데이브레드/1.jpg" class="image"  onclick="goToDetail('원데이브레드');">
+			  	<%}
+			  else
+			  {
+				  %>
+				 	<img src="img/<%=tmp%>/1.jpg" class="image" onclick="goToDetail('<%=info[0]%>');">	
+				  <%
+			  }
+			  %>
+			  </div>
+			  <div class="column right" style="border:1px solid #bbb;">
+			   <div style="font-size:1.6em"><%=info[0]%></div>
+			   	<div><%=info[2]%></div>
+			   <div><%=info[4]%>,<%=info[3]%></div><br>
+			   <div style="font-style:italic">" <%=info[14] %> "</div>
+			  </div>
+		</div>
+      </section>
+      
+      
+      <section class="myStore" >
+      <header class="contentTitle" >
+	         내가 담은 맛집
+      </header>
+      
 <%
 	int cnt=0;
-	String tmp=null;
 	int i;
 	int lasti=strList.size()/9+1;
 	for(i=0; i<lasti; i++)//4pages
@@ -119,7 +241,8 @@
 		</div>
 	<%}
 	%>
-	<section>
+	</section>
+	
 	  <center>
 	    <button class="pagebutton" onclick="openPage('page1',this)" id="defaultOpen">1</button>
 	<%
