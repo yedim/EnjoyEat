@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="slideshow.css">
 <link rel="stylesheet" href="detailRestaurant.css">
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0b3847034c27c026c1b898dfb931716"></script>
 <title>Insert title here</title>
 </head>
@@ -16,15 +17,18 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String detailTitle=request.getParameter("detailTitle");
-	System.out.println(detailTitle);
 
 	String filePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/storeInfo.txt");
 	String likefilePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/likeStore.txt");
+	String reviewPath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/reviews.txt");
 
 	BufferedReader br= new BufferedReader(new FileReader(filePath));
 	BufferedReader likebr= new BufferedReader(new FileReader(likefilePath));
+	BufferedReader reviewbr= new BufferedReader(new FileReader(reviewPath));
 
 	ArrayList<String> likestrList= new ArrayList<String>();
+	ArrayList<String> reviewList= new ArrayList<String>();
+	ArrayList<String> reviewNameList= new ArrayList<String>();
 
 	String ss=null;
 	String[] words;
@@ -60,6 +64,21 @@
 			br.close();
 		}catch(Exception e){	
 			e.getStackTrace();
+		}
+		
+		try{
+			while(true){
+				ss = reviewbr.readLine();
+				if(ss==null)break;
+				words= ss.split(",");
+				if(words[0].contains(detailTitle)){
+					reviewList.add(words[1]);
+					reviewNameList.add(words[2]);
+				}
+			}
+			reviewbr.close();
+		}catch(Exception e){
+			
 		}
 	}	
 %>
@@ -190,39 +209,74 @@
 		  </tr>
 	</table>
       </article>
-
+ 	
       <article class="review">
       <header>솔직한 평가</header>
-		<table class="reveiwTable">
-			<tr>
-			    <td rowspan="3"><img src="images.jpg" class="reviewer"></td>
-			    <td class="reviewTd">작성자</td>
-			    <td>이예림</td>
-			</tr>
-			<tr>
-			    <td class="reviewTd"><img src="star.png"></td>
-			    <td><%=info[1]%></td>
-			</tr>
-			<tr>
-			   <td class="reviewTd">리뷰 </td>
-			   <td><%=info[14] %></td>
-			</tr>
-		</table>
+       <input type="text" placeholder="작성자" class="reviewName" id="reviewName" required>
+       <input type="text" placeholder="댓글남기기" class="reviewText" id="reviewText" required>
+		 <input type="button" value="입력" class="reviewBtn" onclick="reviewOnclick('<%=info[0]%>')">
+		 <div id="comments">
+			<div class="comment">
+			  <div class="comment-content"><p class="author"><strong>이예림</strong> - 10 minutes ago   </p>
+			    <span>
+			      <%=info[14] %>  
+			    </span>
+			  </div>
+		   </div>	
+		   
+		   <%
+		   for(int i=0; i<reviewList.size();i++)
+		   {
+			   %>
+			   <div class="comment" style="margin-top:100px	">
+			   <div class="comment-content"><p class="author"><strong><%=reviewNameList.get(i) %></strong> - 10 minutes ago 
+			   <input type="button" value="x" class="reviewDeleteBtn" onclick="reviewDeleteOnclick('<%=info[0]%>','<%=reviewNameList.get(i)%>','<%=reviewList.get(i)%>')"  /> 
+			   </p>
+			   <span>
+			   <%=reviewList.get(i)%>
+			   </span>
+			   </div>
+			   </div>
+			   <%
+		   }
+		   %>
+		 </div>
+		
       </article>
-
+     <br><br><br><br>
+     
+   
 		<form name="fileSend" method="post" action="likeSave.jsp">
 			<input type="hidden" name="saveTitle" value="" />
 		</form>
-		<iframe id="hidden" name="hiddenifr" src="likeSave.jsp">	
+		<iframe class="hidden" name="hiddenifr" src="likeSave.jsp">	
 		</iframe>
 		
 		<form name="fileDelete" method="post" action="likeDelete.jsp">
 			<input type="hidden" name="deleteTitle" value="" />
 		</form>
-		<iframe id="hidden" name="deletehiddenifr" src="likeDelete.jsp">	
+		<iframe class="hidden" name="deletehiddenifr" src="likeDelete.jsp">	
 		</iframe>
 
+		<form name="reviewSave" method="post" action="reviewSave.jsp">
+			<input type="hidden" name="saveTitle" value="" />
+			<input type="hidden" name="saveReviewName" value="" />
+			<input type="hidden" name="saveReviewText" value="" />
+		</form>
+		<iframe class="hidden" name="reviewhiddenifr" src="reviewSave.jsp">	
+		</iframe>
+		
+		<form name="reviewDelete" method="post" action="reviewDelete.jsp">
+			<input type="hidden" name="deleteTitle" value="" />
+			<input type="hidden" name="deleteReviewName" value="" />
+			<input type="hidden" name="deleteReviewText" value="" />
+		</form>
+		<iframe class="hidden" name="deleteReviewhiddenifr" src="reviewDelete.jsp">	
+		</iframe>
+		
     </section>
+
+
 
     
     <script>
@@ -275,6 +329,63 @@
         }        
  		window.location.reload();
  	}
+    
+    function reviewDeleteOnclick(title,name,text)
+    {
+    	  form=document.reviewDelete;
+          form.deleteTitle.value=title;
+          form.deleteReviewName.value=name;
+          form.deleteReviewText.value=text;
+          form.target="deleteReviewhiddenifr";
+          form.submit();
+          alert("댓글이 삭제되었습니다");
+   		window.location.reload();
+    }
+    
+    function reviewOnclick(title)
+    {
+	   var div = document.createElement("div");
+	   div.className = "comment";
+	   div.style.marginTop="100px";
+	   document.getElementById("comments").appendChild(div);
+	   
+	  
+	   var contentDiv = document.createElement("div"); 
+	   contentDiv.className="comment-content";
+	   div.appendChild(contentDiv);
+	   
+	   var authorP=document.createElement("p");
+	   authorP.className="author";
+	   contentDiv.appendChild(authorP);
+	   
+	   var span_Name_text= document.getElementById("reviewName").value;
+
+	   var strong=document.createElement("strong");
+	   var strong_text = document.createTextNode(span_Name_text);
+	   strong.appendChild(strong_text);
+	   authorP.appendChild(strong);
+	   
+	   var time_text=document.createTextNode(" - 10 minutes ago");
+	   authorP.appendChild(time_text);
+
+	  var span_input_text= document.getElementById("reviewText").value;
+
+	   var span = document.createElement("span");
+	   var span_text = document.createTextNode(span_input_text);
+	   span.appendChild(span_text);
+	   contentDiv.appendChild(span);
+	   
+       form=document.reviewSave;
+       form.saveTitle.value=title;
+       form.saveReviewName.value=span_Name_text;
+       form.saveReviewText.value=span_input_text;
+       form.target="reviewhiddenifr";
+       form.submit();
+       alert("댓글이 작성되었습니다");
+		window.location.reload();
+
+	   
+    }
     </script>
     <jsp:include page="footer.jsp" flush="false"></jsp:include>
     
