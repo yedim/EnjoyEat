@@ -22,9 +22,14 @@
 }
 
 .heart{
-  width: 70%;
+  width: 40%;
+  cursor:pointer;
 }
-
+.check{
+	width:40%; 
+	float:right;
+  cursor:pointer;
+}
 .heartarea{
   position:absolute; margin-left:25%;
 }

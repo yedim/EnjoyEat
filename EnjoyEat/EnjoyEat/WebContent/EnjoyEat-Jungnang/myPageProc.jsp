@@ -14,7 +14,7 @@
 
 header.contentTitle{
   padding:3%;
-  padding-left:10%;
+  padding-left:5%;
   text-align:center;
   padding-top:70px;
   font-size:1.6em;
@@ -26,7 +26,7 @@ header.contentTitle{
  	color:#ff9166;
 }
 
-section.myStore,.todayStore{
+section.myStore,.todayStore,.ateStore{
 	background-color: white;
 	margin:5%;
 	color:#002833;
@@ -58,36 +58,23 @@ section.myStore,.todayStore{
     clear: both;
 }
 .column>.image{
-cursor:pointer;
-width:100%;
-height:100%;
-transition:all .2s ease-in-out;
--webkit-transition:all .2s ease-in-out;
--moz-transition:all .2s ease-in-out;
--ms-transition:all .2s ease-in-out;
--o-transition:all .2s ease-in-out;
-
+	cursor:pointer;
+	width:100%;
+	height:100%;
+	transition:all .2s ease-in-out;
+	-webkit-transition:all .2s ease-in-out;
+	-moz-transition:all .2s ease-in-out;
+	-ms-transition:all .2s ease-in-out;
+	-o-transition:all .2s ease-in-out;
 }
 
 .column>.image:hover {
-transition:all .4s ease-in-out;
--webkit-transition:all .4s ease-in-out;
--moz-transition:all .4s ease-in-out;
--ms-transition:all .4s ease-in-out;
--o-transition:all .4s ease-in-out;
-moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radius:50%
-}
-
-.img-square-ellipse:hover {-}
-
-.img-square-ellipse
-{
-
-}
-
-.img-square-ellipse:hover
-{
-
+	transition:all .4s ease-in-out;
+	-webkit-transition:all .4s ease-in-out;
+	-moz-transition:all .4s ease-in-out;
+	-ms-transition:all .4s ease-in-out;
+	-o-transition:all .4s ease-in-out;
+	moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radius:50%
 }
 
 </style>
@@ -99,13 +86,17 @@ moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radi
  	request.setCharacterEncoding("utf-8");	
 	String filePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/storeInfo.txt");
 	String likefilePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/likeStore.txt");
+	String checkfilePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/checkStore.txt");
 
 	BufferedReader br= new BufferedReader(new FileReader(filePath));
 	BufferedReader likebr= new BufferedReader(new FileReader(likefilePath));
+	BufferedReader checkbr= new BufferedReader(new FileReader(checkfilePath));
 
 	String ss=null;
 	ArrayList<String[]> strList= new ArrayList<String[]>();
 	ArrayList<String> likestrList= new ArrayList<String>();
+	ArrayList<String> checkstrList= new ArrayList<String>();
+	ArrayList<String[]> strCheckList= new ArrayList<String[]>();
 
 	String[] words;
 	String[] info=new String[14];
@@ -127,6 +118,20 @@ moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radi
 		e.getStackTrace();
 	}
 	
+	n=0;
+	try{
+		while(true){
+			ss = checkbr.readLine();
+			if(ss==null)break;
+			if(n!=0)
+				checkstrList.add(ss);	
+			n++;
+		}
+		checkbr.close();
+	}catch(Exception e){	
+		e.getStackTrace();
+	}
+	
 	try{
 		while(true){
 			ss = br.readLine();
@@ -137,12 +142,20 @@ moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radi
 				if(words[0].contains(likestrList.get(i))){
 					strList.add(words);
 				}
-			}		
+			}	
+			
+			for(int i=0; i<checkstrList.size(); i++)
+			{
+				if(words[0].contains(checkstrList.get(i))){
+					strCheckList.add(words);
+				}
+			}	
+			
 		}
-		br.close();
 	}catch(Exception e){	
 		e.getStackTrace();
 	}
+	
 	
  %>
       <form name="detail" method="post" action="detailRestaurantProc.jsp">
@@ -241,7 +254,6 @@ moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radi
 		</div>
 	<%}
 	%>
-	</section>
 	
 	  <center>
 	    <button class="pagebutton" onclick="openPage('page1',this)" id="defaultOpen">1</button>
@@ -261,6 +273,55 @@ moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;border-radi
 %>
 	  </center>
 	</section>
+	
+	<section class="ateStore" >
+      <header class="contentTitle" >
+	         내가 먹어본 맛집
+      </header>
+      <div>
+<%
+	cnt=0;
+		for(int j=0; j<9;j++)//9grid
+		{
+			if(cnt>=strCheckList.size()) break;
+			info = strCheckList.get(cnt);
+			
+			tmp=info[0].trim();
+			if(cnt==0 || cnt%3==0){
+				%>
+			<section class="grid-container">
+			<%}
+			%>		
+			  <article class="grid-item">
+			  <%
+			  	if(tmp.contains("원데이브레드"))
+			  	{%>
+			  		<img src="img/원데이브레드/1.jpg" class="image" alt="">
+			  	<%}
+			  	else
+			  	{ %>
+			  	<img src="img/<%=tmp%>/1.jpg" class="image" onclick="goToDetail('<%=info[0]%>');">	
+			  	<%}
+			  %>
+			    <div class="grid">
+			      <div class="grid-star-review"><img src="star.png"><%=info[1]%></div>
+			      <div class="grid-title" onclick="goToDetail('<%=info[0]%>');"><%=info[0]%></div>
+			      <div><%=info[2]%></div>
+			      <div><%=info[4]%>,<%=info[3]%></div>
+			    </div>
+			  </article>
+		  <%
+		  if(cnt%3==2)
+		  {%>
+		</section>	  
+		  <%}
+		  cnt++;
+		}%>
+		</div>
+	
+	 
+      </section>
+	 
 	
 	<script>
 	function openPage(pageName,elmnt) {

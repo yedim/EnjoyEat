@@ -20,13 +20,16 @@
 
 	String filePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/storeInfo.txt");
 	String likefilePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/likeStore.txt");
+	String checkfilePath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/checkStore.txt");
 	String reviewPath = request.getRealPath("/EnjoyEat-Jungnang/txtfile/reviews.txt");
 
 	BufferedReader br= new BufferedReader(new FileReader(filePath));
 	BufferedReader likebr= new BufferedReader(new FileReader(likefilePath));
+	BufferedReader checkbr= new BufferedReader(new FileReader(checkfilePath));
 	BufferedReader reviewbr= new BufferedReader(new FileReader(reviewPath));
 
 	ArrayList<String> likestrList= new ArrayList<String>();
+	ArrayList<String> checkstrList= new ArrayList<String>();
 	ArrayList<String> reviewList= new ArrayList<String>();
 	ArrayList<String> reviewNameList= new ArrayList<String>();
 
@@ -34,17 +37,25 @@
 	String[] words;
 	String[] info=new String[17];
 
-	int n=0;
 	//likeStore에 있는거 다 넣어
 	try{
 		while(true){
 			ss = likebr.readLine();
 			if(ss==null)break;
-			if(n!=0)
-				likestrList.add(ss);	
-			n++;
+			likestrList.add(ss);	
 		}
 		likebr.close();
+	}catch(Exception e){	
+		e.getStackTrace();
+	}
+	
+	try{
+		while(true){
+			ss = checkbr.readLine();
+			if(ss==null)break;
+			checkstrList.add(ss);	
+		}
+		checkbr.close();
 	}catch(Exception e){	
 		e.getStackTrace();
 	}
@@ -81,6 +92,8 @@
 			
 		}
 	}	
+	
+
 %>
 	<jsp:include page="header.jsp" flush="false"></jsp:include>
 
@@ -173,6 +186,28 @@
         	String menuInfoData1[]=info[12].split(" ");
         	String menuInfoData2[]=info[13].split(" ");
         %>
+        
+        <%
+        boolean isCheckStore=false;
+        	for(int i=0; i<checkstrList.size();i++)
+        	{
+        		if(info[0].contains(checkstrList.get(i))){
+        			isCheckStore=true;
+        		}
+        	}
+        	
+        	if(isCheckStore==true){
+        		%>
+        		<img src="check.png" class="check" name="check" onclick="changeCheckImage('<%=info[0]%>');">
+        		<%
+        	}
+        	else{
+        		%>
+        		<img src="noncheck.png" class="check" name="check" onclick="changeCheckImage('<%=info[0]%>');">
+        		<%
+        	}
+        	
+        %>
         </div>
         <div><%=info[2]%></div>
         <div><%=info[4]%>,<%=info[3]%></div>
@@ -258,6 +293,20 @@
 		<iframe class="hidden" name="deletehiddenifr" src="likeDelete.jsp">	
 		</iframe>
 
+
+		<form name="checkSend" method="post" action="checkSave.jsp">
+			<input type="hidden" name="saveTitle" value="" />
+		</form>
+		<iframe class="hidden" name="checkhiddenifr" src="checkSave.jsp">	
+		</iframe>
+		
+		<form name="checkDelete" method="post" action="checkDelete.jsp">
+			<input type="hidden" name="deleteTitle" value="" />
+		</form>
+		<iframe class="hidden" name="checkDeletehiddenifr" src="checkDelete.jsp">	
+		</iframe>
+
+
 		<form name="reviewSave" method="post" action="reviewSave.jsp">
 			<input type="hidden" name="saveTitle" value="" />
 			<input type="hidden" name="saveReviewName" value="" />
@@ -320,6 +369,8 @@
           alert("음식이 저장되었습니다");
         }
         else if(heartState.includes("like.png")){
+       		alert("like2");
+
             document.heart.src="dislike.png";
             form=document.fileDelete;
             form.deleteTitle.value=title;
@@ -329,6 +380,30 @@
         }        
  		window.location.reload();
  	}
+    
+    var checkform;
+    var checkState=document.check.src;
+
+    function changeCheckImage(title)
+    {
+    	 if(checkState.includes("noncheck.png")){
+             document.check.src="check.png";
+             checkform=document.checkSend;
+             checkform.saveTitle.value=title;
+             checkform.target="checkhiddenifr";
+             checkform.submit();
+             alert("먹은 음식이 저장되었습니다");
+           }
+           else if(checkState.includes("check.png")){
+               document.check.src="noncheck.png";
+               checkform=document.checkDelete;
+               checkform.deleteTitle.value=title;
+               checkform.target="checkDeletehiddenifr";
+               checkform.submit();
+               alert("먹은 음식이 삭제되었습니다 ");
+           }        
+    		window.location.reload();
+    }
     
     function reviewDeleteOnclick(title,name,text)
     {
