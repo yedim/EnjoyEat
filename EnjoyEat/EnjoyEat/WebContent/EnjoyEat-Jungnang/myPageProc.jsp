@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="grid.css">
 <link rel="stylesheet" href="restaurant.css">
-<title>Insert title here</title>
+<title>EnjoyEat</title>
 <style>
 
 

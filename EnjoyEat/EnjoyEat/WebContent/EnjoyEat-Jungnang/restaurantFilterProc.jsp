@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="grid.css">
 <link rel="stylesheet" href="restaurant.css">
 <script src="selectBox.js"></script>
-<title>Insert title here</title>
+<title>EnjoyEat</title>
 </head>
 <body onload="init(this.form)">
 <jsp:include page="header.jsp" flush="false"></jsp:include>

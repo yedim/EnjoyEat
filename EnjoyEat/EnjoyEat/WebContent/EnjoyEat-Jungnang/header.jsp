@@ -36,6 +36,7 @@
     <nav class="topnav">
       <a href="myPage.jsp" class="linkImg heartImg"> <img src = "dislike.png"></img> <%=n %></a>     
       <a href="index.jsp" class="logo"><img src="img/logo/logo.png"></img></a>
+      <a href="contact.jsp">Contact</a>
       <a href="myPage.jsp">MyPage</a>
       <a href="restaurant.jsp">List</a>
       <a href="best.jsp">Best</a>

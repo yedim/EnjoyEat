@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="detailRestaurant.css">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0b3847034c27c026c1b898dfb931716"></script>
-<title>Insert title here</title>
+<title>EnjoyEat</title>
 </head>
 <body>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="grid.css">
-<title>Insert title here</title>
+<title>EnjoyEat</title>
 </head>
 <body>
  <form name="detail" method="post" action="detailRestaurantProc.jsp">

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="grid.css">
 <link rel="stylesheet" href="slideshow.css">
 <!-- <script src="gotoTop.js"></script>-->
-<title>Insert title here</title>
+<title>EnjoyEat</title>
 </head>
 <body>
 
