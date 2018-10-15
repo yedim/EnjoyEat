@@ -99,7 +99,7 @@ section.theme{
 .bestPrev,.bestNext{
   cursor: pointer;
   position: absolute;
-  top: 140%;
+  top: 160%;
   width: auto;
   padding: 10px;  
   color: #ff9166;

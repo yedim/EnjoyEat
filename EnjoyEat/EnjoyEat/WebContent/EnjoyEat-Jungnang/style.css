@@ -13,7 +13,9 @@ body {
     -webkit-animation: flash 1.5s;
     animation: flash 1.5s;
  }
- 
+ article>img{
+ 	border-radius:10px;
+ }
  @-webkit-keyframes flash {
 	 0% {
 	   opacity: .4;

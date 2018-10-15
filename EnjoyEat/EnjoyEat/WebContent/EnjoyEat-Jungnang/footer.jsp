@@ -31,8 +31,22 @@
 function mailto()
 {
 	var mailText =document.getElementById("mailText").value;
+	
+	if(! email_check(mailText) ) {
+        alert('잘못된 형식의 이메일 주소입니다.');
+        $(this).focus();
+        return false;
+    }
+	
 	document.mailform.action="mailto:"+mailText+"?Subject=EnjoyEat%20Subscribe";
 	document.mailform.submit();
+}
+
+function email_check( email ) {
+    
+    var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    return (email != '' && email != 'undefined' && regex.test(email));
+ 
 }
 </script>
 </body>

@@ -419,45 +419,60 @@
     
     function reviewOnclick(title)
     {
-	   var div = document.createElement("div");
-	   div.className = "comment";
-	   div.style.marginTop="100px";
-	   document.getElementById("comments").appendChild(div);
-	   
-	  
-	   var contentDiv = document.createElement("div"); 
-	   contentDiv.className="comment-content";
-	   div.appendChild(contentDiv);
-	   
-	   var authorP=document.createElement("p");
-	   authorP.className="author";
-	   contentDiv.appendChild(authorP);
-	   
-	   var span_Name_text= document.getElementById("reviewName").value;
+    	var reviewName = document.getElementById("reviewName").value;
+    	var reviewText = document.getElementById("reviewText").value;
+    	if(reviewName=='' || reviewName=='undefined')
+    	{
+    		alert("작성자를 입력하세요");
+    	}
+    	else if(reviewText=='' || reviewText=='undefined')
+    	{
+    		alert("댓글을 입력하세요");
+    	}
+    	else
+    	{
+    		var div = document.createElement("div");
+    		   div.className = "comment";
+    		   div.style.marginTop="100px";
+    		   document.getElementById("comments").appendChild(div);
+    		   
+    		  
+    		   var contentDiv = document.createElement("div"); 
+    		   contentDiv.className="comment-content";
+    		   div.appendChild(contentDiv);
+    		   
+    		   var authorP=document.createElement("p");
+    		   authorP.className="author";
+    		   contentDiv.appendChild(authorP);
+    		   
+    		   var span_Name_text= document.getElementById("reviewName").value;
 
-	   var strong=document.createElement("strong");
-	   var strong_text = document.createTextNode(span_Name_text);
-	   strong.appendChild(strong_text);
-	   authorP.appendChild(strong);
-	   
-	   var time_text=document.createTextNode(" - 10 minutes ago");
-	   authorP.appendChild(time_text);
+    		   var strong=document.createElement("strong");
+    		   var strong_text = document.createTextNode(span_Name_text);
+    		   strong.appendChild(strong_text);
+    		   authorP.appendChild(strong);
+    		   
+    		   var time_text=document.createTextNode(" - 10 minutes ago");
+    		   authorP.appendChild(time_text);
 
-	  var span_input_text= document.getElementById("reviewText").value;
+    		  var span_input_text= document.getElementById("reviewText").value;
 
-	   var span = document.createElement("span");
-	   var span_text = document.createTextNode(span_input_text);
-	   span.appendChild(span_text);
-	   contentDiv.appendChild(span);
-	   
-       form=document.reviewSave;
-       form.saveTitle.value=title;
-       form.saveReviewName.value=span_Name_text;
-       form.saveReviewText.value=span_input_text;
-       form.target="reviewhiddenifr";
-       form.submit();
-       alert("댓글이 작성되었습니다");
-		window.location.reload();
+    		   var span = document.createElement("span");
+    		   var span_text = document.createTextNode(span_input_text);
+    		   span.appendChild(span_text);
+    		   contentDiv.appendChild(span);
+    		   
+    	       form=document.reviewSave;
+    	       form.saveTitle.value=title;
+    	       form.saveReviewName.value=span_Name_text;
+    	       form.saveReviewText.value=span_input_text;
+    	       form.target="reviewhiddenifr";
+    	       form.submit();
+    	       alert("댓글이 작성되었습니다");
+    			window.location.reload();
+    	}
+
+    	
 
 	   
     }

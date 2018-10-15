@@ -164,8 +164,23 @@ section.myStore,.todayStore,.ateStore{
       
         <section class="todayStore" style="padding-top:40px">
 	      <header class="contentTitle" >
-		         오늘의 추천 맛집
+		         <p id="recommend"></p>
 	      </header>
+	      <script>
+			var i = 0;
+			var txt = '오늘의 추천 맛집';
+			var speed = 50;
+			
+			function typeTitle() {
+			  if (i < txt.length) {
+			    document.getElementById("recommend").innerHTML += txt.charAt(i);
+			    i++;
+			    setTimeout(typeTitle, speed);
+			  }
+			}
+			typeTitle();
+			</script>
+	      
 	      
 	      <div class="row">
 			<%

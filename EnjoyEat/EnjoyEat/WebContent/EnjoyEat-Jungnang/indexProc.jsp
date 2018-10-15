@@ -7,7 +7,24 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="grid.css">
 <link rel="stylesheet" href="slideshow.css">
-<!-- <script src="gotoTop.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+        window.location.hash = hash;
+      });
+    }
+  });
+});
+
+
+</script>
 <title>EnjoyEat</title>
 </head>
 <body>
@@ -22,7 +39,8 @@
 		 <h1 class="title"><span>E</span><span>n</span><span>j</span><span>o</span><span>y</span><span> 
        </span><span>E</span><span>a</span><span>t</span></h1>
 		</header>
-       <button class="buttonStart" type="button" name="button" onclick ="location.href='restaurant.jsp'">Enjoy!</button>
+       <button class="buttonStart" type="button" name="button" onclick ="location.href='restaurant.jsp'">Enjoy!</button><br><br><br><br><br><br>
+      <a href="#firstBest" ><img src="down-arrow.png" ></a>
     </section>
     
     <!--Best-->
